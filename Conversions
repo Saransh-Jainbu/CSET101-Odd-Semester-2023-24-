@@ -1,0 +1,29 @@
+def convert_base(number, source_base, target_base):
+    # Convert the number from the source base to decimal
+    decimal_value = int(number, source_base)
+    
+    # Convert the decimal value to the target base
+    if target_base == 2:
+        result = bin(decimal_value).replace("0b", "")
+    elif target_base == 8:
+        result = oct(decimal_value).replace("0o", "")
+    elif target_base == 16:
+        result = hex(decimal_value).upper().replace("0X", "")
+    else:
+        result = ""
+        quotient = decimal_value
+        while quotient > 0:
+            remainder = quotient % target_base
+            result = str(remainder) + result
+            quotient = quotient // target_base
+    
+    return result
+
+# Input
+number = input("Enter a number: ")
+source_base = int(input("Enter the source base: "))
+target_base = int(input("Enter the target base: "))
+
+# Conversion and output
+result = convert_base(number, source_base, target_base)
+print(f"Result in base {target_base}: {result}")
